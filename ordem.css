@@ -5,48 +5,51 @@ body {
   color: #333;
   margin: 0;
   padding: 0;
-  line-height: 1.6; /* Melhor legibilidade */
+  box-sizing: border-box;
 }
 
-/* Estilo do cabeçalho */
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-  padding: 10px; /* Adiciona espaçamento interno */
-  text-align: center;
+/* Aplica box-sizing a todos os elementos */
+*, *::before, *::after {
+  box-sizing: inherit;
 }
 
-/* Estilo da logo */
-.header .logo {
-  height: 80px; /* Tamanho mais proporcional para dispositivos móveis */
-}
-
-/* Estilo do título */
+/* Estilo para o título com logo */
 .titulo {
-  font-size: 24px; /* Ajuste do tamanho para responsividade */
+  display: flex;
+  align-items: center; /* Alinha logo e título verticalmente */
+  justify-content: center; /* Centraliza logo e texto horizontalmente */
+  font-size: 28px;
   color: #003a6f;
-  margin: 0;
+  text-align: center; /* Alinha o texto centralizado */
+}
+
+.titulo img {
+  height: 60px; /* Ajusta tamanho da logo */
+  margin-right: 10px; /* Espaçamento entre a logo e o texto */
+}
+.logo{
+  height: 60px; /* Ajusta tamanho da logo */
+  margin-right: 10px; /* Espaçamento entre a logo e o texto */
 }
 
 /* Container principal */
 .container {
-  max-width: 800px;
-  margin: 20px auto;
+  max-width: 900px;
+  margin: 20px auto; /* Centraliza o container */
   background: #fff;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Impede que elementos ultrapassem o container */
   transition: all 0.3s ease;
 }
 
 /* Título */
 h1 {
   text-align: center;
-  font-size: 26px;
+  font-size: 24px;
   color: #007bff;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 /* Estilo do formulário */
@@ -56,23 +59,15 @@ form {
   gap: 15px;
 }
 
-/* Estilo para rótulos */
-label {
-  font-size: 14px;
-  color: #555;
-  font-weight: bold;
-}
-
-/* Estilo para inputs, textarea e select */
+/* Estilo para inputs e textarea */
 input, textarea, select {
-  padding: 12px;
+  padding: 10px;
   font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  width: 100%;
+  width: 100%; /* Ajusta largura para não ultrapassar o container */
+  max-width: 100%; /* Limita a largura máxima */
   background-color: #f9f9f9;
-  box-sizing: border-box; /* Inclui padding e borda no cálculo do tamanho */
-  max-width: 100%; /* Garante responsividade */
   transition: all 0.3s ease;
 }
 
@@ -85,68 +80,43 @@ input:focus, textarea:focus, select:focus {
 
 /* Estilo para o botão */
 button {
-  padding: 12px 20px;
-  font-size: 16px;
+  padding: 10px 15px;
+  font-size: 14px;
   background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
   background-color: #0056b3;
-  transform: scale(1.02); /* Efeito de zoom suave */
 }
 
-/* Responsividade para telas menores */
+/* Responsividade */
 @media (max-width: 768px) {
   .container {
     padding: 15px;
-    margin: 10px; /* Garante margem consistente */
-    width: 95%; /* Melhor aproveitamento do espaço */
-  }
-
-  h1 {
-    font-size: 22px;
+    margin: 15px;
   }
 
   .titulo {
-    font-size: 20px;
+    font-size: 22px; /* Reduz o tamanho do texto */
+    flex-direction: column; /* Alinha logo e texto em coluna */
+    gap: 10px;
   }
 
-  .header .logo {
-    height: 60px; /* Tamanho menor para dispositivos menores */
+  .titulo img {
+    height: 50px; /* Reduz tamanho da logo */
   }
 
-  input, textarea, select {
-    font-size: 14px; /* Tamanho ajustado para mobile */
-  }
-
-  button {
-    font-size: 14px;
-    padding: 10px 15px; /* Reduz o padding para manter proporção */
-  }
-}
-
-/* Ajuste adicional para telas muito pequenas */
-@media (max-width: 480px) {
   h1 {
     font-size: 20px;
-  }
-
-  .titulo {
-    font-size: 18px;
-  }
-
-  .container {
-    padding: 10px;
-    margin: 5px;
   }
 
   button {
     font-size: 12px;
-    padding: 8px 10px;
+    padding: 8px 12px;
   }
 }
