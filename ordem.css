@@ -1,151 +1,116 @@
 /* Reset de estilo */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f7fc;
-    padding: 20px;
-  }
-  
-  .container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  h1.titulo {
-    text-align: center;
-    font-size: 28px;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  /* Estilo para as seções */
-  h3 {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  label {
-    font-size: 14px;
-    color: #555;
-    margin-bottom: 6px;
-  }
-  
-  input, select, textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-    background-color: #f9f9f9;
-  }
-  
-  textarea {
-    resize: vertical;
-  }
-  
-  input[type="number"] {
-    -moz-appearance: textfield; /* Remover setas do número */
-  }
-  
-  input[type="text"], input[type="email"], input[type="number"], select {
-    transition: border-color 0.3s ease;
-  }
-  
-  input[type="text"]:focus, input[type="email"]:focus, input[type="number"]:focus, select:focus {
-    border-color: #007BFF;
-    outline: none;
-  }
-  
-  button {
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: #fff;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Layout das seções */
-  .client-info, .appliance-info, .service-info {
-    padding: 20px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-  }
-  
-  .client-info label, .appliance-info label, .service-info label {
-    font-size: 14px;
-    color: #666;
-  }
-  
-  .button-container {
-    text-align: center;
-  }
-  
-  /* Estilo de separação */
-  hr {
-    border: 1px solid #ddd;
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
-  
-  /* Estilo do campo de assinatura */
-  .signature-box {
-    margin-top: 30px;
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-  }
-  
-  .signature-box div {
-    width: 45%;
-  }
-  
-  .signature-box label {
-    font-size: 14px;
-    color: #555;
-  }
-  
-  .signature-box input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-  }
-  
-  /* Estilo para a data */
-  .date-box {
-    text-align: center;
-    margin-top: 30px;
-  }
-  
-  .date-box span {
-    font-size: 14px;
-    color: #333;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f7fc;
+  padding: 20px;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 100px;
+  height: auto;
+}
+
+h1.titulo {
+  font-size: 28px;
+  color: #333;
+  margin-top: 10px;
+}
+
+/* Estilos para as seções */
+h3 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+label {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  background-color: #f9f9f9;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Layout das seções */
+.client-info, .appliance-info, .service-info {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+}
+
+.client-info label, .appliance-info label, .service-info label {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Estilo de separação */
+hr {
+  border: 1px solid #ddd;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Estilo para a data */
+.date-box {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.date-box span {
+  font-size: 14px;
+  color: #333;
+}

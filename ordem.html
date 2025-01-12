@@ -8,9 +8,9 @@
 </head>
 <body>
   <div class="container">
-    <header>
-      <img src="logo.png " alt="Logo da Empresa" class="logo" width="20px">
-      <h1 class="titulo">Ordem de Serviço - Refrigeração</h1>
+    <header class="header">
+      <img src="logo.png" alt="Logo da Empresa" class="logo">
+      <h1 class="titulo">Ordem de Serviço</h1>
     </header>
 
     <form id="osForm">
@@ -49,7 +49,7 @@
         <label for="aparelhoEstado">Estado:</label>
         <input type="text" id="aparelhoEstado" required>
 
-        <label for="gás">Tipo de Gás do Aparelho:</label>
+        <label for="gás">Tipo de Gás:</label>
         <input type="text" id="gás" required>
 
         <label for="quantidadeGás">Quantidade de Gás (kg):</label>
@@ -113,6 +113,7 @@
       // Dados do Cliente (Bloco)
       doc.setFontSize(12);
       doc.text('Dados do Cliente:', 10, 40);
+      doc.setFontSize(10);
       doc.text(`Nome: ${clienteNome}`, 10, 50);
       doc.text(`Telefone: ${clienteTelefone}`, 10, 60);
       doc.text(`Endereço: ${clienteEndereco}`, 10, 70);
@@ -120,7 +121,9 @@
       doc.text(`Tipo de Cliente: ${tipoCliente}`, 10, 90);
 
       // Informações do Aparelho (Bloco)
+      doc.setFontSize(12);
       doc.text('Informações do Aparelho:', 10, 100);
+      doc.setFontSize(10);
       doc.text(`Marca: ${aparelhoMarca}`, 10, 110);
       doc.text(`Modelo: ${aparelhoModelo}`, 10, 120);
       doc.text(`Número de Série: ${aparelhoNumeroSerie}`, 10, 130);
@@ -130,13 +133,17 @@
       doc.text(`Verificação de Vazamento: ${verificacaoVazamento}`, 10, 170);
 
       // Descrição do Serviço (Bloco)
+      doc.setFontSize(12);
       doc.text('Descrição do Serviço:', 10, 180);
+      doc.setFontSize(10);
       doc.text(servicoDescricao, 10, 190);
 
       // Valor e Técnico (Bloco)
+      doc.setFontSize(12);
       doc.text(`Valor Estimado: R$ ${valor.toFixed(2)}`, 10, 210);
       doc.text(`Técnico Responsável: ${tecnico}`, 10, 220);
 
+      // Salvar o PDF
       doc.save('ordem_servico.pdf');
     }
   </script>
