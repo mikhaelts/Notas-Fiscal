@@ -1,66 +1,113 @@
+/* Estilo base para o corpo */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f6fc;
+  color: #333;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
 }
 
+/* Container principal */
 .container {
-  max-width: 800px;
-  margin: 20px auto;
+  max-width: 900px;
+  margin: 40px auto;
   background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Título */
 h1 {
   text-align: center;
-  color: #333;
+  font-size: 28px;
+  color: #007bff;
+  margin-bottom: 20px;
 }
 
+/* Estilo do formulário */
 form {
   display: flex;
   flex-direction: column;
+  gap: 15px;
 }
 
+/* Estilo para rótulos */
 label {
-  margin-top: 10px;
+  font-size: 14px;
+  color: #555;
   font-weight: bold;
 }
 
+/* Estilo para inputs e textarea */
 input, textarea, select {
-  padding: 10px;
-  margin-top: 5px;
+  padding: 12px;
+  font-size: 14px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 8px;
   width: 100%;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
 }
 
+/* Foco nos inputs e textarea */
+input:focus, textarea:focus, select:focus {
+  border-color: #007bff;
+  background-color: #e6f0ff;
+  outline: none;
+}
+
+/* Estilo para o botão */
 button {
-  margin-top: 20px;
-  padding: 10px 15px;
+  padding: 12px 20px;
+  font-size: 16px;
   background-color: #007bff;
   color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
   background-color: #0056b3;
 }
 
+/* Container para os botões de ação */
 .button-container {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  gap: 10px;
 }
 
+/* Estilo do botão do WhatsApp */
 .whatsapp-button {
   background-color: #25D366;
 }
 
 .whatsapp-button:hover {
   background-color: #128C7E;
+}
+
+/* Estilo do título da página */
+.titulo {
+  color: #007bff;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* Estilos adicionais de espaçamento e responsividade */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .button-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }
