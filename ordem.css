@@ -5,6 +5,7 @@ body {
   color: #333;
   margin: 0;
   padding: 0;
+  line-height: 1.6; /* Melhor legibilidade */
 }
 
 /* Estilo do cabeçalho */
@@ -12,27 +13,29 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 15px; /* Espaçamento entre a logo e o título */
+  gap: 15px;
+  padding: 10px; /* Adiciona espaçamento interno */
+  text-align: center;
 }
 
 /* Estilo da logo */
 .header .logo {
-  height: 100px; /* Ajuste o tamanho da logo conforme necessário */
+  height: 80px; /* Tamanho mais proporcional para dispositivos móveis */
 }
 
 /* Estilo do título */
 .titulo {
-  font-size: 28px;
+  font-size: 24px; /* Ajuste do tamanho para responsividade */
   color: #003a6f;
+  margin: 0;
 }
-
 
 /* Container principal */
 .container {
-  max-width: 900px;
-  margin: 40px auto;
+  max-width: 800px;
+  margin: 20px auto;
   background: #fff;
-  padding: 30px;
+  padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
@@ -41,7 +44,7 @@ body {
 /* Título */
 h1 {
   text-align: center;
-  font-size: 28px;
+  font-size: 26px;
   color: #007bff;
   margin-bottom: 20px;
 }
@@ -60,7 +63,7 @@ label {
   font-weight: bold;
 }
 
-/* Estilo para inputs e textarea */
+/* Estilo para inputs, textarea e select */
 input, textarea, select {
   padding: 12px;
   font-size: 14px;
@@ -68,6 +71,8 @@ input, textarea, select {
   border-radius: 8px;
   width: 100%;
   background-color: #f9f9f9;
+  box-sizing: border-box; /* Inclui padding e borda no cálculo do tamanho */
+  max-width: 100%; /* Garante responsividade */
   transition: all 0.3s ease;
 }
 
@@ -87,48 +92,61 @@ button {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
   background-color: #0056b3;
+  transform: scale(1.02); /* Efeito de zoom suave */
 }
 
-/* Responsividade */
+/* Responsividade para telas menores */
 @media (max-width: 768px) {
   .container {
-    padding: 20px;
+    padding: 15px;
+    margin: 10px; /* Garante margem consistente */
+    width: 95%; /* Melhor aproveitamento do espaço */
   }
 
   h1 {
-    font-size: 24px;
+    font-size: 22px;
   }
 
-  .titulo img {
-    height: 35px; /* Logo menor em telas pequenas */
+  .titulo {
+    font-size: 20px;
   }
-}
-/* Estilo base para todos os elementos do formulário */
-input, textarea, select {
-  box-sizing: border-box; /* Inclui padding e borda no cálculo do tamanho */
-  max-width: 100%; /* Garante que os elementos não ultrapassem o container */
-  min-width: 0; /* Evita que inputs cresçam demais */
-}
 
-/* Ajuste adicional para o container em telas menores */
-@media (max-width: 768px) {
-  .container {
-    padding: 20px;
-    margin: 20px; /* Adiciona margem para evitar o conteúdo grudado */
-    width: 90%; /* Limita a largura em telas menores */
+  .header .logo {
+    height: 60px; /* Tamanho menor para dispositivos menores */
   }
 
   input, textarea, select {
-    font-size: 14px; /* Ajusta o tamanho da fonte */
+    font-size: 14px; /* Tamanho ajustado para mobile */
   }
 
   button {
-    font-size: 14px; /* Ajusta o tamanho do botão */
-    padding: 10px; /* Reduz o padding para ficar proporcional */
+    font-size: 14px;
+    padding: 10px 15px; /* Reduz o padding para manter proporção */
+  }
+}
+
+/* Ajuste adicional para telas muito pequenas */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 20px;
+  }
+
+  .titulo {
+    font-size: 18px;
+  }
+
+  .container {
+    padding: 10px;
+    margin: 5px;
+  }
+
+  button {
+    font-size: 12px;
+    padding: 8px 10px;
   }
 }
