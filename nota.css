@@ -1,4 +1,3 @@
-
 /* Estilo base para o corpo */
 body {
   font-family: 'Arial', sans-serif;
@@ -7,6 +6,8 @@ body {
   margin: 0;
   padding: 0;
 }
+
+/* Estilo para o título com logo */
 .titulo {
   display: flex;
   align-items: center; /* Alinha a logo e o título verticalmente */
@@ -16,17 +17,16 @@ body {
 }
 
 .titulo img {
-  height: 100px; /* Ajuste o tamanho da logo */
+  height: 80px; /* Reduz o tamanho da logo */
   margin-right: 10px; /* Espaçamento entre a logo e o texto */
 }
-
 
 /* Container principal */
 .container {
   max-width: 900px;
-  margin: 40px auto;
+  margin: 20px auto; /* Ajusta a margem para dispositivos menores */
   background: #fff;
-  padding: 30px;
+  padding: 20px; /* Reduz o padding */
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
@@ -35,9 +35,9 @@ body {
 /* Título */
 h1 {
   text-align: center;
-  font-size: 28px;
+  font-size: 24px; /* Reduz o tamanho do título */
   color: #007bff;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 /* Estilo do formulário */
@@ -56,7 +56,7 @@ label {
 
 /* Estilo para inputs e textarea */
 input, textarea, select {
-  padding: 12px;
+  padding: 10px;
   font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -74,8 +74,8 @@ input:focus, textarea:focus, select:focus {
 
 /* Estilo para o botão */
 button {
-  padding: 12px 20px;
-  font-size: 16px;
+  padding: 10px 15px; /* Reduz o padding */
+  font-size: 14px; /* Ajusta o tamanho do texto */
   background-color: #007bff;
   color: #fff;
   border: none;
@@ -108,10 +108,26 @@ button:hover {
 /* Responsividade */
 @media (max-width: 768px) {
   .container {
-    padding: 20px;
+    padding: 15px; /* Reduz o padding */
+    margin: 15px; /* Ajusta o espaçamento */
+  }
+
+  .titulo {
+    font-size: 22px; /* Reduz o tamanho do texto */
+    flex-direction: column; /* Alinha logo e texto em coluna */
+    gap: 10px; /* Espaçamento entre logo e texto */
+  }
+
+  .titulo img {
+    height: 60px; /* Logo menor em telas menores */
   }
 
   h1 {
-    font-size: 24px;
+    font-size: 20px; /* Ajusta o tamanho do título */
+  }
+
+  button {
+    font-size: 12px; /* Ajusta o texto do botão */
+    padding: 8px 12px; /* Reduz o padding */
   }
 }
