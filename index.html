@@ -5,17 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tela Inicial - Sistema de Serviços</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <header>
+    <div class="navbar">
+      <h1 class="logo">Sistema de Serviços - BDS Refrigeração</h1>
+  
+    </div>
+  </header>
+
   <div class="container">
-    <h1 class="titulo">O que você deseja?</h1>
+    <h2 class="titulo">O que você deseja?</h2>
 
     <div class="opcao-container">
       <div class="opcao" onclick="redirectTo('ordem.html')">
-        <h2>Ordem de Serviço</h2>
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/clipboard.png" alt="Ordem de Serviço">
+        <h3>Ordem de Serviço</h3>
       </div>
       <div class="opcao" onclick="redirectTo('nota.html')">
-        <h2>Nota Fiscal</h2>
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/receipt.png" alt="Nota Fiscal">
+        <h3>Nota Fiscal</h3>
       </div>
     </div>
   </div>

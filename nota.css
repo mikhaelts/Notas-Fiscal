@@ -1,11 +1,25 @@
+
 /* Estilo base para o corpo */
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #f4f6fc;
+  background-color: #7d9cf1;
   color: #333;
   margin: 0;
   padding: 0;
 }
+.titulo {
+  display: flex;
+  align-items: center; /* Alinha a logo e o título verticalmente */
+  justify-content: center; /* Alinha ambos na mesma linha */
+  font-size: 28px;
+  color: #003a6f;
+}
+
+.titulo img {
+  height: 100px; /* Ajuste o tamanho da logo */
+  margin-right: 10px; /* Espaçamento entre a logo e o texto */
+}
+
 
 /* Container principal */
 .container {
@@ -15,6 +29,7 @@ body {
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
 /* Título */
@@ -73,11 +88,12 @@ button:hover {
   background-color: #0056b3;
 }
 
-/* Container para os botões de ação */
-.button-container {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
+/* Indicador de progresso */
+.progress-bar {
+  width: 0%;
+  height: 5px;
+  background-color: #28a745;
+  transition: width 0.3s ease;
 }
 
 /* Estilo do botão do WhatsApp */
@@ -89,14 +105,7 @@ button:hover {
   background-color: #128C7E;
 }
 
-/* Estilo do título da página */
-.titulo {
-  color: #007bff;
-  font-size: 22px;
-  font-weight: bold;
-}
-
-/* Estilos adicionais de espaçamento e responsividade */
+/* Responsividade */
 @media (max-width: 768px) {
   .container {
     padding: 20px;
@@ -105,22 +114,4 @@ button:hover {
   h1 {
     font-size: 24px;
   }
-
-  .button-container {
-    flex-direction: column;
-    align-items: stretch;
-  }
-}
- /* Estilos para o título com logo */
- .titulo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  color: #333;
-}
-
-.titulo img {
-  height: 100px; /* Ajuste o tamanho da logo */
-  margin-right: 10px; /* Espaçamento entre logo e texto */
 }

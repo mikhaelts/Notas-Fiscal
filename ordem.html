@@ -5,6 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ordem de Serviço - Refrigeração</title>
   <link rel="stylesheet" href="ordem.css">
+  <style>
+    /* Estilos para a barra de carregamento */
+    .loading-bar-container {
+      width: 100%;
+      background-color: #f3f3f3;
+      border-radius: 5px;
+      height: 10px;
+      display: none;
+    }
+
+    .loading-bar {
+      height: 100%;
+      background-color: #003a6f;
+      width: 0%;
+      border-radius: 5px;
+    }
+
+    /* Estilo para o texto azul */
+    .text-blue {
+      color: #1e90ff;
+    }
+
+    /* Estilo para a barra de divisão */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background-color: #003a6f;
+      margin: 20px 0;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -35,6 +65,8 @@
         </select>
       </section>
 
+      <div class="divider"></div>
+
       <section class="appliance-info">
         <h3>Informações do Aparelho</h3>
         <label for="aparelhoMarca">Marca:</label>
@@ -62,6 +94,8 @@
         </select>
       </section>
 
+      <div class="divider"></div>
+
       <section class="service-info">
         <h3>Descrição do Serviço</h3>
         <label for="servicoDescricao">Descrição:</label>
@@ -78,13 +112,20 @@
         <button type="button" onclick="gerarPDF()">Gerar Ordem de Serviço</button>
       </div>
     </form>
+
+    <!-- Barra de carregamento -->
+    <div class="loading-bar-container" id="loadingBarContainer">
+      <div class="loading-bar" id="loadingBar"></div>
+    </div>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
   <script>
     async function gerarPDF() {
-      const { jsPDF } = window.jspdf;
-
+      // Exibir a barra de carregamento
+      document.getElementById('loadingBarContainer').style.display = 'block';
+      const loadingBar = document.getElementById('loadingBar');
+      
       // Coleta os dados do formulário
       const clienteNome = document.getElementById("clienteNome").value;
       const clienteTelefone = document.getElementById("clienteTelefone").value;
@@ -102,49 +143,93 @@
       const valor = parseFloat(document.getElementById("valor").value);
       const tecnico = document.getElementById("tecnico").value;
 
-      // Geração do PDF
+      const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
+
+      // Título da Ordem de Serviço
+      doc.setFontSize(20);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Ordem de Serviço - BDS Refrigeração', 105, 20, { align: 'center' });
+
+      // Logo da empresa (ajustado conforme necessidade)
+      doc.addImage('logo.png', 'PNG', 10, 10, 30, 30);
+
+      // Nome da empresa, endereço e telefone
+      doc.setFontSize(12);
+      doc.setFont('helvetica', 'normal');
+      doc.text('Endereço: Rua Exemplo, 123, Recife, PE', 50, 30);
+      doc.text('Telefone: (81) 12345-6789', 50, 40);
+
+      // Dados do Cliente
       doc.setFontSize(14);
-      doc.text('Ordem de Serviço - Refrigeração', 105, 20, { align: 'center' });
+      doc.setFont('helvetica', 'bold');
+      doc.text('Dados do Cliente', 10, 60);
 
-      // Logo da empresa
-      doc.addImage('logo.png', 'PNG', 10, 10, 30, 30); // Ajuste a posição e o tamanho do logo conforme necessário
-
-      // Dados do Cliente (Bloco)
       doc.setFontSize(12);
-      doc.text('Dados do Cliente:', 10, 40);
-      doc.setFontSize(10);
-      doc.text(`Nome: ${clienteNome}`, 10, 50);
-      doc.text(`Telefone: ${clienteTelefone}`, 10, 60);
-      doc.text(`Endereço: ${clienteEndereco}`, 10, 70);
-      doc.text(`E-mail: ${clienteEmail}`, 10, 80);
-      doc.text(`Tipo de Cliente: ${tipoCliente}`, 10, 90);
+      doc.setFont('helvetica', 'normal');
+      doc.text(`Nome: ${clienteNome}`, 10, 70);
+      doc.text(`Telefone: ${clienteTelefone}`, 10, 80);
+      doc.text(`Endereço: ${clienteEndereco}`, 10, 90);
+      doc.text(`E-mail: ${clienteEmail}`, 10, 100);
+      doc.text(`Tipo de Cliente: ${tipoCliente}`, 10, 110);
 
-      // Informações do Aparelho (Bloco)
+      // Divisores entre as seções
+      doc.setLineWidth(0.5);
+      doc.line(10, 115, 200, 115); // Linha divisória
+
+      // Informações do Aparelho
+      doc.setFontSize(14);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Informações do Aparelho', 10, 130);
+
       doc.setFontSize(12);
-      doc.text('Informações do Aparelho:', 10, 100);
-      doc.setFontSize(10);
-      doc.text(`Marca: ${aparelhoMarca}`, 10, 110);
-      doc.text(`Modelo: ${aparelhoModelo}`, 10, 120);
-      doc.text(`Número de Série: ${aparelhoNumeroSerie}`, 10, 130);
-      doc.text(`Estado: ${aparelhoEstado}`, 10, 140);
-      doc.text(`Gás Utilizado: ${gás}`, 10, 150);
-      doc.text(`Quantidade de Gás: ${quantidadeGás} kg`, 10, 160);
-      doc.text(`Verificação de Vazamento: ${verificacaoVazamento}`, 10, 170);
+      doc.setFont('helvetica', 'normal');
+      doc.text(`Marca: ${aparelhoMarca}`, 10, 140);
+      doc.text(`Modelo: ${aparelhoModelo}`, 10, 150);
+      doc.text(`Número de Série: ${aparelhoNumeroSerie}`, 10, 160);
+      doc.text(`Estado: ${aparelhoEstado}`, 10, 170);
+      doc.text(`Tipo de Gás: ${gás}`, 10, 180);
+      doc.text(`Quantidade de Gás: ${quantidadeGás} kg`, 10, 190);
+      doc.text(`Verificação de Vazamento: ${verificacaoVazamento}`, 10, 200);
 
-      // Descrição do Serviço (Bloco)
+      doc.line(10, 205, 200, 205); // Linha divisória
+
+      // Descrição do Serviço
+      doc.setFontSize(14);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Descrição do Serviço', 10, 220);
+
       doc.setFontSize(12);
-      doc.text('Descrição do Serviço:', 10, 180);
-      doc.setFontSize(10);
-      doc.text(servicoDescricao, 10, 190);
+      doc.setFont('helvetica', 'normal');
+      doc.text(servicoDescricao, 10, 230);
 
-      // Valor e Técnico (Bloco)
+      // Valor e Técnico
+      doc.setFontSize(14);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Valor Estimado', 10, 270);
+
       doc.setFontSize(12);
-      doc.text(`Valor Estimado: R$ ${valor.toFixed(2)}`, 10, 210);
-      doc.text(`Técnico Responsável: ${tecnico}`, 10, 220);
+      doc.setFont('helvetica', 'normal');
+      doc.text(`R$ ${valor.toFixed(2)}`, 10, 280);
 
-      // Salvar o PDF
-      doc.save('ordem_servico.pdf');
+      doc.text(`Técnico Responsável: ${tecnico}`, 10, 290);
+
+      // Linha final
+      doc.line(10, 295, 200, 295);
+
+      // Atualizar a barra de carregamento
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += 10;
+        loadingBar.style.width = `${progress}%`;
+        if (progress >= 100) {
+          clearInterval(interval);
+          // Salvar o PDF
+          doc.save('ordem_servico.pdf');
+          // Ocultar a barra de carregamento
+          document.getElementById('loadingBarContainer').style.display = 'none';
+        }
+      }, 100); // Atualiza a barra de carregamento a cada 100ms
     }
   </script>
 </body>

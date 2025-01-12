@@ -1,80 +1,91 @@
-/* Reset de estilo */
-* {
+/* Estilo base para o corpo */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #7d9cf1;
+  color: #333;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f7fc;
-  padding: 20px;
+/* Estilo do cabeçalho */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px; /* Espaçamento entre a logo e o título */
 }
 
+/* Estilo da logo */
+.header .logo {
+  height: 100px; /* Ajuste o tamanho da logo conforme necessário */
+}
+
+/* Estilo do título */
+.titulo {
+  font-size: 28px;
+  color: #003a6f;
+}
+
+
+/* Container principal */
 .container {
-  width: 80%;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #fff;
+  max-width: 900px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
-header {
+/* Título */
+h1 {
   text-align: center;
+  font-size: 28px;
+  color: #007bff;
   margin-bottom: 20px;
 }
 
-.logo {
-  width: 100px;
-  height: auto;
+/* Estilo do formulário */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-h1.titulo {
-  font-size: 28px;
-  color: #333;
-  margin-top: 10px;
-}
-
-/* Estilos para as seções */
-h3 {
-  font-size: 16px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 10px;
-}
-
+/* Estilo para rótulos */
 label {
   font-size: 14px;
   color: #555;
-  margin-bottom: 6px;
+  font-weight: bold;
 }
 
-input, select, textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+/* Estilo para inputs e textarea */
+input, textarea, select {
+  padding: 12px;
   font-size: 14px;
-  background-color: #fff; /* Input com fundo branco */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
 }
 
-textarea {
-  resize: vertical;
+/* Foco nos inputs e textarea */
+input:focus, textarea:focus, select:focus {
+  border-color: #007bff;
+  background-color: #e6f0ff;
+  outline: none;
 }
 
-input[type="number"] {
-  -moz-appearance: textfield;
-}
-
+/* Estilo para o botão */
 button {
-  padding: 10px 20px;
-  background-color: #007BFF;
-  color: #fff;
+  padding: 12px 20px;
   font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -83,61 +94,17 @@ button:hover {
   background-color: #0056b3;
 }
 
-/* Layout das seções */
-.client-info, .appliance-info, .service-info {
-  padding: 20px;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  margin-bottom: 20px;
-}
-
-.client-info label, .appliance-info label, .service-info label {
-  font-size: 14px;
-  color: #666;
-}
-
-/* Estilo de separação */
-hr {
-  border: 1px solid #ddd;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-/* Estilo para a data */
-.date-box {
-  text-align: center;
-  margin-top: 30px;
-}
-
-.date-box span {
-  font-size: 14px;
-  color: #333;
-}
-
 /* Responsividade */
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .container {
-    width: 95%;
-    padding: 10px;
+    padding: 20px;
   }
 
-  h1.titulo {
+  h1 {
     font-size: 24px;
   }
 
-  input, select, textarea {
-    font-size: 16px;
-    padding: 12px;
-  }
-
-  button {
-    font-size: 14px;
-    padding: 8px 16px;
-  }
-
-  /* Ajuste nas seções para telas menores */
-  .client-info, .appliance-info, .service-info {
-    padding: 15px;
+  .titulo img {
+    height: 35px; /* Logo menor em telas pequenas */
   }
 }

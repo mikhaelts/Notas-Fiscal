@@ -1,54 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gerador de Nota Fiscal</title>
   <link rel="stylesheet" href="nota.css">
   <style>
-   
+    /* Estilo da barra de progresso */
+    .loading-bar-container {
+      width: 100%;
+      background-color: #f3f3f3;
+      height: 10px;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+
+    .loading-bar {
+      width: 0%; /* Começa vazia */
+      height: 100%; /* Altura total do container */
+      background-color: #4caf50; /* Cor da barra */
+      transition: width 0.5s ease; /* Transição suave */
+    }
+
+    /* Estilo geral do formulário */
+    form {
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    .button-container {
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1 class="titulo">
-      <img src="logo.png" alt="Logo BDS"> Nota Fiscal
+      <img class="logobds" src="logo.png" alt="Logo BDS"> Nota Fiscal
     </h1>
     <form id="notaForm">
+      <!-- Barra de progresso -->
+      <div class="loading-bar-container">
+        <div class="loading-bar" id="loadingBar"></div>
+      </div>
+
+      <!-- Campos do formulário -->
       <label>
         Tipo:
-        <select id="tipo" required>
+        <select id="tipo" required oninput="updateProgress()">
           <option value="Pedido">Pedido</option>
           <option value="Orçamento">Orçamento</option>
         </select>
       </label>
 
       <label for="data">Data:</label>
-      <input type="date" id="data" required>
+      <input type="date" id="data" required oninput="updateProgress()">
 
       <label for="nome">Nome:</label>
-      <input type="text" id="nome" required>
+      <input type="text" id="nome" required oninput="updateProgress()">
 
       <label for="endereco">Endereço:</label>
-      <input type="text" id="endereco" required>
+      <input type="text" id="endereco" required oninput="updateProgress()">
 
       <label for="cidade">Cidade:</label>
-      <input type="text" id="cidade" required>
+      <input type="text" id="cidade" required oninput="updateProgress()">
 
       <label for="cpf">CPF/CNPJ:</label>
-      <input type="text" id="cpf" required>
+      <input type="text" id="cpf" required oninput="updateProgress()">
 
       <label for="descricao">Descrição do Produto/Serviço:</label>
-      <textarea id="descricao" rows="4" required></textarea>
+      <textarea id="descricao" rows="4" required oninput="updateProgress()"></textarea>
 
       <label for="valorUnit">Valor Unitário:</label>
-      <input type="number" id="valorUnit" required step="0.01" min="0">
+      <input type="number" id="valorUnit" required step="0.01" min="0" oninput="updateProgress()">
 
       <label for="quantidade">Quantidade:</label>
-      <input type="number" id="quantidade" required min="1">
+      <input type="number" id="quantidade" required min="1" oninput="updateProgress()">
 
       <label for="entrada">Entrada (se houver):</label>
-      <input type="number" id="entrada" step="0.01" min="0">
+      <input type="number" id="entrada" step="0.01" min="0" oninput="updateProgress()">
 
       <div class="button-container">
         <button type="button" onclick="gerarPDF()">Gerar PDF</button>
@@ -60,11 +104,20 @@
   <script>
     let pdfData = null; // Variável para armazenar o PDF gerado
 
+    // Função para atualizar a barra de progresso
+    function updateProgress() {
+      const formElements = document.querySelectorAll('#notaForm input, #notaForm textarea, #notaForm select');
+      let filledFields = 0;
+      formElements.forEach(input => {
+        if (input.value.trim() !== "") filledFields++;
+      });
+      const progress = (filledFields / formElements.length) * 100;
+      document.getElementById('loadingBar').style.width = progress + '%';
+    }
+
     async function gerarPDF() {
       const { jsPDF } = window.jspdf;
-
-      // Carrega a imagem da logo
-      const logoURL = "logo.png"; // Substitua pela URL da sua logo ou caminho local
+      const logoURL = "logo.png";
       const logoImg = await fetch(logoURL).then(res => res.blob());
       const logoBase64 = await new Promise(resolve => {
         const reader = new FileReader();
@@ -72,7 +125,6 @@
         reader.readAsDataURL(logoImg);
       });
 
-      // Coleta os dados do formulário
       const tipo = document.getElementById("tipo").value;
       const data = document.getElementById("data").value;
       const nome = document.getElementById("nome").value;
@@ -83,30 +135,22 @@
       const valorUnit = parseFloat(document.getElementById("valorUnit").value);
       const quantidade = parseInt(document.getElementById("quantidade").value);
       const entrada = parseFloat(document.getElementById("entrada").value || 0);
-
       const total = valorUnit * quantidade;
       const restante = total - entrada;
 
-      // Configura o layout do PDF
       const doc = new jsPDF();
 
-      // Adiciona a logo ao PDF
       doc.addImage(logoBase64, "PNG", 15, 10, 40, 40);
-
-      // Cabeçalho
       doc.setFontSize(16);
       doc.setTextColor(0, 0, 128);
       doc.text("BDS Refrigeração", 105, 20, { align: "center" });
       doc.setFontSize(12);
       doc.text("Fone: (87) 99654-1234", 105, 28, { align: "center" });
-      doc.setFontSize(10);
       doc.text("Endereço: Rua dos Exemplos, 123, Recife/PE", 105, 34, { align: "center" });
 
-      // Linha divisória
       doc.setLineWidth(0.5);
       doc.line(10, 50, 200, 50);
 
-      // Informações do cliente
       doc.setFontSize(12);
       doc.text(`Tipo: ${tipo}`, 15, 60);
       doc.text(`Data: ${data}`, 15, 70);
@@ -115,35 +159,27 @@
       doc.text(`Cidade: ${cidade}`, 15, 100);
       doc.text(`CPF/CNPJ: ${cpf}`, 15, 110);
 
-      // Tabela de produtos/serviços
-      doc.setFontSize(12);
       doc.text("Descrição", 15, 120);
       doc.text("Qtd", 120, 120);
       doc.text("Unitário", 140, 120);
       doc.text("Total", 180, 120);
-
-      doc.line(10, 125, 200, 125); // Linha divisória
+      doc.line(10, 125, 200, 125);
       doc.text(descricao, 15, 130);
       doc.text(`${quantidade}`, 120, 130);
       doc.text(`R$ ${valorUnit.toFixed(2)}`, 140, 130);
       doc.text(`R$ ${total.toFixed(2)}`, 180, 130);
 
-      // Totais
-      doc.setFontSize(12);
       doc.text(`Entrada: R$ ${entrada.toFixed(2)}`, 15, 150);
       doc.text(`Restante: R$ ${restante.toFixed(2)}`, 15, 160);
       doc.setFontSize(14);
       doc.text(`TOTAL: R$ ${total.toFixed(2)}`, 15, 170);
 
-      // Rodapé
       doc.setFontSize(10);
       doc.text("Obrigado pela preferência!", 105, 280, { align: "center" });
 
-      // Salva o PDF em formato base64
       pdfData = doc.output("datauristring");
       doc.save(`Nota_Fiscal_${nome}_${data}.pdf`);
     }
-
   </script>
 </body>
 </html>
