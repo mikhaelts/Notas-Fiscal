@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ordem de Serviço - Refrigeração</title>
+  <link rel="stylesheet" href="ordem.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="logo.png " alt="Logo da Empresa" class="logo" width="20px">
+      <h1 class="titulo">Ordem de Serviço - Refrigeração</h1>
+    </header>
+
+    <form id="osForm">
+      <section class="client-info">
+        <h3>Dados do Cliente</h3>
+        <label for="clienteNome">Nome do Cliente:</label>
+        <input type="text" id="clienteNome" required>
+
+        <label for="clienteTelefone">Telefone:</label>
+        <input type="text" id="clienteTelefone" required>
+
+        <label for="clienteEndereco">Endereço:</label>
+        <input type="text" id="clienteEndereco" required>
+
+        <label for="clienteEmail">E-mail:</label>
+        <input type="email" id="clienteEmail" required>
+
+        <label for="tipoCliente">Tipo de Cliente:</label>
+        <select id="tipoCliente" required>
+          <option value="Residencial">Residencial</option>
+          <option value="Comercial">Comercial</option>
+        </select>
+      </section>
+
+      <section class="appliance-info">
+        <h3>Informações do Aparelho</h3>
+        <label for="aparelhoMarca">Marca:</label>
+        <input type="text" id="aparelhoMarca" required>
+
+        <label for="aparelhoModelo">Modelo:</label>
+        <input type="text" id="aparelhoModelo" required>
+
+        <label for="aparelhoNumeroSerie">Número de Série:</label>
+        <input type="text" id="aparelhoNumeroSerie" required>
+
+        <label for="aparelhoEstado">Estado:</label>
+        <input type="text" id="aparelhoEstado" required>
+
+        <label for="gás">Tipo de Gás do Aparelho:</label>
+        <input type="text" id="gás" required>
+
+        <label for="quantidadeGás">Quantidade de Gás (kg):</label>
+        <input type="number" id="quantidadeGás" required>
+
+        <label for="verificacaoVazamento">Verificação de Vazamento:</label>
+        <select id="verificacaoVazamento" required>
+          <option value="Sim">Sim</option>
+          <option value="Não">Não</option>
+        </select>
+      </section>
+
+      <section class="service-info">
+        <h3>Descrição do Serviço</h3>
+        <label for="servicoDescricao">Descrição:</label>
+        <textarea id="servicoDescricao" rows="4" required></textarea>
+
+        <label for="valor">Valor Estimado:</label>
+        <input type="number" id="valor" required step="0.01" min="0">
+
+        <label for="tecnico">Técnico Responsável:</label>
+        <input type="text" id="tecnico" required>
+      </section>
+
+      <div class="button-container">
+        <button type="button" onclick="gerarPDF()">Gerar Ordem de Serviço</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <script>
+    async function gerarPDF() {
+      const { jsPDF } = window.jspdf;
+
+      // Coleta os dados do formulário
+      const clienteNome = document.getElementById("clienteNome").value;
+      const clienteTelefone = document.getElementById("clienteTelefone").value;
+      const clienteEndereco = document.getElementById("clienteEndereco").value;
+      const clienteEmail = document.getElementById("clienteEmail").value;
+      const tipoCliente = document.getElementById("tipoCliente").value;
+      const aparelhoMarca = document.getElementById("aparelhoMarca").value;
+      const aparelhoModelo = document.getElementById("aparelhoModelo").value;
+      const aparelhoNumeroSerie = document.getElementById("aparelhoNumeroSerie").value;
+      const aparelhoEstado = document.getElementById("aparelhoEstado").value;
+      const gás = document.getElementById("gás").value;
+      const quantidadeGás = document.getElementById("quantidadeGás").value;
+      const verificacaoVazamento = document.getElementById("verificacaoVazamento").value;
+      const servicoDescricao = document.getElementById("servicoDescricao").value;
+      const valor = parseFloat(document.getElementById("valor").value);
+      const tecnico = document.getElementById("tecnico").value;
+
+      // Geração do PDF
+      const doc = new jsPDF();
+      doc.setFontSize(14);
+      doc.text('Ordem de Serviço - Refrigeração', 105, 20, { align: 'center' });
+
+      // Logo da empresa
+      doc.addImage('logo.png', 'PNG', 10, 10, 30, 30); // Ajuste a posição e o tamanho do logo conforme necessário
+
+      // Dados do Cliente (Bloco)
+      doc.setFontSize(12);
+      doc.text('Dados do Cliente:', 10, 40);
+      doc.text(`Nome: ${clienteNome}`, 10, 50);
+      doc.text(`Telefone: ${clienteTelefone}`, 10, 60);
+      doc.text(`Endereço: ${clienteEndereco}`, 10, 70);
+      doc.text(`E-mail: ${clienteEmail}`, 10, 80);
+      doc.text(`Tipo de Cliente: ${tipoCliente}`, 10, 90);
+
+      // Informações do Aparelho (Bloco)
+      doc.text('Informações do Aparelho:', 10, 100);
+      doc.text(`Marca: ${aparelhoMarca}`, 10, 110);
+      doc.text(`Modelo: ${aparelhoModelo}`, 10, 120);
+      doc.text(`Número de Série: ${aparelhoNumeroSerie}`, 10, 130);
+      doc.text(`Estado: ${aparelhoEstado}`, 10, 140);
+      doc.text(`Gás Utilizado: ${gás}`, 10, 150);
+      doc.text(`Quantidade de Gás: ${quantidadeGás} kg`, 10, 160);
+      doc.text(`Verificação de Vazamento: ${verificacaoVazamento}`, 10, 170);
+
+      // Descrição do Serviço (Bloco)
+      doc.text('Descrição do Serviço:', 10, 180);
+      doc.text(servicoDescricao, 10, 190);
+
+      // Valor e Técnico (Bloco)
+      doc.text(`Valor Estimado: R$ ${valor.toFixed(2)}`, 10, 210);
+      doc.text(`Técnico Responsável: ${tecnico}`, 10, 220);
+
+      doc.save('ordem_servico.pdf');
+    }
+  </script>
+</body>
+</html>
