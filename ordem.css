@@ -57,7 +57,7 @@ input, select, textarea {
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 14px;
-  background-color: #f9f9f9;
+  background-color: #fff; /* Input com fundo branco */
 }
 
 textarea {
@@ -113,4 +113,31 @@ hr {
 .date-box span {
   font-size: 14px;
   color: #333;
+}
+
+/* Responsividade */
+@media screen and (max-width: 768px) {
+  .container {
+    width: 95%;
+    padding: 10px;
+  }
+
+  h1.titulo {
+    font-size: 24px;
+  }
+
+  input, select, textarea {
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  /* Ajuste nas seções para telas menores */
+  .client-info, .appliance-info, .service-info {
+    padding: 15px;
+  }
 }
