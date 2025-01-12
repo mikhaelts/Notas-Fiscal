@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gerador de Nota Fiscal</title>
- <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
+  
 </head>
 <body>
   <div class="container">
@@ -47,6 +48,7 @@
 
       <div class="button-container">
         <button type="button" onclick="gerarPDF()">Gerar PDF</button>
+        <button type="button" class="whatsapp-button" onclick="enviarWhatsapp()">Enviar para WhatsApp</button>
       </div>
     </form>
   </div>
@@ -57,6 +59,15 @@
 
     async function gerarPDF() {
       const { jsPDF } = window.jspdf;
+
+      // Carrega a imagem da logo
+      const logoURL = "logo.png"; // Substitua pela URL da sua logo ou caminho local
+      const logoImg = await fetch(logoURL).then(res => res.blob());
+      const logoBase64 = await new Promise(resolve => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.readAsDataURL(logoImg);
+      });
 
       // Coleta os dados do formulário
       const tipo = document.getElementById("tipo").value;
@@ -76,17 +87,23 @@
       // Configura o layout do PDF
       const doc = new jsPDF();
 
-      // Adiciona o logo ao PDF (não estamos usando o logo no exemplo)
-      // doc.addImage(logoBase64, "PNG", 15, 10, 40, 40);
+      // Adiciona a logo ao PDF
+      doc.addImage(logoBase64, "PNG", 15, 10, 40, 40);
 
-      // Cabeçalho e conteúdo do PDF
+      // Cabeçalho
       doc.setFontSize(16);
       doc.setTextColor(0, 0, 128);
       doc.text("BDS Refrigeração", 105, 20, { align: "center" });
       doc.setFontSize(12);
       doc.text("Fone: (87) 99654-1234", 105, 28, { align: "center" });
+      doc.setFontSize(10);
+      doc.text("Endereço: Rua dos Exemplos, 123, Recife/PE", 105, 34, { align: "center" });
 
-      // Informações do cliente e produtos/serviços
+      // Linha divisória
+      doc.setLineWidth(0.5);
+      doc.line(10, 50, 200, 50);
+
+      // Informações do cliente
       doc.setFontSize(12);
       doc.text(`Tipo: ${tipo}`, 15, 60);
       doc.text(`Data: ${data}`, 15, 70);
@@ -96,18 +113,27 @@
       doc.text(`CPF/CNPJ: ${cpf}`, 15, 110);
 
       // Tabela de produtos/serviços
+      doc.setFontSize(12);
+      doc.text("Descrição", 15, 120);
+      doc.text("Qtd", 120, 120);
+      doc.text("Unitário", 140, 120);
+      doc.text("Total", 180, 120);
+
+      doc.line(10, 125, 200, 125); // Linha divisória
       doc.text(descricao, 15, 130);
       doc.text(`${quantidade}`, 120, 130);
       doc.text(`R$ ${valorUnit.toFixed(2)}`, 140, 130);
       doc.text(`R$ ${total.toFixed(2)}`, 180, 130);
 
       // Totais
+      doc.setFontSize(12);
       doc.text(`Entrada: R$ ${entrada.toFixed(2)}`, 15, 150);
       doc.text(`Restante: R$ ${restante.toFixed(2)}`, 15, 160);
       doc.setFontSize(14);
       doc.text(`TOTAL: R$ ${total.toFixed(2)}`, 15, 170);
 
       // Rodapé
+      doc.setFontSize(10);
       doc.text("Obrigado pela preferência!", 105, 280, { align: "center" });
 
       // Salva o PDF em formato base64
@@ -115,7 +141,16 @@
       doc.save(`Nota_Fiscal_${nome}_${data}.pdf`);
     }
 
-
+    function enviarWhatsapp() {
+      if (pdfData) {
+        const numeroWhatsapp = "55xxxxxxxxxxx"; // Substitua pelo número do WhatsApp desejado
+        const mensagem = "Aqui está sua nota fiscal!";
+        const linkWhatsapp = `https://wa.me/${numeroWhatsapp}?text=${encodeURIComponent(mensagem)}%0A${encodeURIComponent(pdfData)}`;
+        window.open(linkWhatsapp, "_blank");
+      } else {
+        alert("Por favor, gere o PDF primeiro.");
+      }
+    }
   </script>
 </body>
 </html>
