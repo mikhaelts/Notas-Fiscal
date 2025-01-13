@@ -92,18 +92,10 @@ button:hover {
 .progress-bar {
   width: 0%;
   height: 5px;
-  background-color: #28a745;
+  background-color: #0056b3;
   transition: width 0.3s ease;
 }
 
-/* Estilo do botão do WhatsApp */
-.whatsapp-button {
-  background-color: #25D366;
-}
-
-.whatsapp-button:hover {
-  background-color: #128C7E;
-}
 
 /* Responsividade */
 @media (max-width: 768px) {
