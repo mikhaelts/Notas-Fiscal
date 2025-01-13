@@ -106,6 +106,8 @@
 
         <label for="tecnico">Técnico Responsável:</label>
         <input type="text" id="tecnico" required>
+        <label for="dataOS">Data da OS:</label>
+        <input type="date" id="dataOS" required>
       </section>
 
       <div class="button-container">
@@ -128,6 +130,7 @@
       
       // Coleta os dados do formulário
       const clienteNome = document.getElementById("clienteNome").value;
+      const dataOS = document.getElementById("dataOS").value;
       const clienteTelefone = document.getElementById("clienteTelefone").value;
       const clienteEndereco = document.getElementById("clienteEndereco").value;
       const clienteEmail = document.getElementById("clienteEmail").value;
@@ -142,6 +145,8 @@
       const servicoDescricao = document.getElementById("servicoDescricao").value;
       const valor = parseFloat(document.getElementById("valor").value);
       const tecnico = document.getElementById("tecnico").value;
+      
+
 
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
@@ -157,8 +162,8 @@
       // Nome da empresa, endereço e telefone
       doc.setFontSize(12);
       doc.setFont('helvetica', 'normal');
-      doc.text('Endereço: Rua Exemplo, 123, Recife, PE', 50, 30);
-      doc.text('Telefone: (81) 12345-6789', 50, 40);
+      doc.text('São Lourenço da mata,Av.Cláudio Alves de Souza,N. 92', 50, 30);
+      doc.text('Telefone: (81)98769-4413', 50, 40);
 
       // Dados do Cliente
       doc.setFontSize(14);
@@ -195,9 +200,12 @@
       doc.line(10, 205, 200, 205); // Linha divisória
 
       // Descrição do Serviço
+      doc.text(`Data da OS: ${dataOS}`, 10, 260);
       doc.setFontSize(14);
       doc.setFont('helvetica', 'bold');
       doc.text('Descrição do Serviço', 10, 220);
+      
+
 
       doc.setFontSize(12);
       doc.setFont('helvetica', 'normal');
